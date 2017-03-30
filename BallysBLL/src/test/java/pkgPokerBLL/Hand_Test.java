@@ -83,6 +83,25 @@ public class Hand_Test {
 	}
 	
 	@Test
+	public void TestFiveOfAKind() {
+		Hand h = new Hand();
+		h.AddToCardsInHand(new Card(eSuit.SPADES, eRank.TEN,1));
+		h.AddToCardsInHand(new Card(eSuit.HEARTS, eRank.TEN,1));
+		h.AddToCardsInHand(new Card(eSuit.DIAMONDS, eRank.TEN,1));
+		h.AddToCardsInHand(new Card(eSuit.CLUBS, eRank.TEN,1));
+		h.AddToCardsInHand(new Card(eSuit.JOKERS, eRank.JOKER,1));
+		
+		try {
+			h = h.EvaluateHand();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		assertTrue(h.getHandScore().getHandStrength() == eHandStrength.FiveOfAKind);
+		assertTrue(h.getHandScore().getHiHand() == eRank.TEN);
+	}
+	
+	@Test
 	public void TestFourOfAKind() {
 		Hand h = new Hand();
 		h.AddToCardsInHand(new Card(eSuit.SPADES, eRank.TEN,1));
@@ -118,6 +137,7 @@ public class Hand_Test {
 	
 		assertTrue(h.getHandScore().getHandStrength() == eHandStrength.FourOfAKind);
 		assertTrue(h.getHandScore().getHiHand() == eRank.ACE);
+		assertTrue(h.getHandScore().getLoHand() == eRank.TEN);
 	}
 	
 	@Test
